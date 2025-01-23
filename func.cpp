@@ -46,3 +46,70 @@ void Print(Node* sent)
         p = p->next;
     }
 }
+
+bool IsThreeSymb(int x)
+{
+    short length = 0;
+    do {
+        length++;
+        x /= 10;
+    } while (x != 0);
+
+    if(length == 3)
+        return true;
+    return false;
+}
+
+void bubbleSort(Node* sent)
+{
+    if (sent->next == sent) return;
+
+    bool swapped;
+    do {
+        swapped = false;
+        Node* p = sent->next; 
+        
+        while (p->next != sent)
+        {
+            int k = p->data;
+            int k1 = p->next->data;
+            if (k > k1) 
+            {
+                std::swap(p->data, p->next->data);
+                swapped = true;
+            }
+            p = p->next;
+        }
+    } while (swapped);
+}
+
+bool IsPrime(int x)
+{
+    if (x <= 1) return false; 
+
+    for(int i = 2; i <= sqrt(x); i++)
+    {
+        if(x % i == 0) 
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool HavePalindrome(Node* sent)
+{
+    Node* p = sent->next;
+    while(p != sent)
+    {
+        if(IsThreeSymb(p->data))
+        {
+            if(isPalindrome(p->data))
+            {
+                return true;
+            }
+        }
+        p = p->next;
+    }
+    return false;
+}
